@@ -1,0 +1,29 @@
+.allcompleted_task_list .task__heading_title {
+  text-decoration: line-through;
+  color: #472EA3;
+}
+.allcompleted_task {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+.allcompleted_task>h1 {
+  color: #000;
+  text-align: center;
+  font-size: 16.117px;
+  font-family: Lato;
+  font-weight: 500;
+}
+
+.allcompleted_task_list {
+  padding: 3px 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.timer{
+}
