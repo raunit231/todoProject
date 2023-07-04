@@ -18,7 +18,8 @@ export const register = async (req, res) => {
     });
     const savedUser = await newUser.save();
     const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
-    res.status(201).json({ token, savedUser });
+    savedUser.password = undefined;
+    res.status(201).json({ token, user:savedUser });
 
 
   } catch (error) {

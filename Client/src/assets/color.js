@@ -1,0 +1,1 @@
+export const rygColor = ["#ff6666", "#e6e600", "#00cc66"];

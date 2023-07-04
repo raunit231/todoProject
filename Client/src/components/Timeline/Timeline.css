@@ -24,40 +24,35 @@
 .timeline__block_inner_item {
   background-color: #3E7553;
   border-radius: 1rem;
+  border: 0.2rem solid #919191;
   height: 60%;
   position: absolute;
   bottom: 0;
   display: flex;
   flex-direction: column;
+  transition: all 0.2s ease-in;
+}
+
+.timeline__block_inner_item:hover {
+  transition: all 0.2s ease-in;
+  z-index: 2;
+  background-color: var(--hover-color);
 }
 
 .timeline__block_inner_item.active {
   height: 80%;
+  background-color: var(--hover-color);
 }
 
 
-.timeline__block_inner_item>h1 {
-  display: none;
+.timeline__block_inner_item {
   color: #FFF;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 0.7rem;
   font-family: Lato;
-  font-weight: 600;
+  padding: 10px 4px;
 }
-.timeline__block_inner_item>h2 {
-  display: none;
-  color: #FFF;
-  text-align: center;
-  font-size: 1rem;
-  font-family: Lato;
-  font-weight: 400;
-}
-.timeline__block_inner_item.active > h1 {
-  display: block;
-}
-.timeline__block_inner_item.active > h2 {
-  display: block;
-}
+
 
 .hourStripe {
   border: 0px solid #FFF;

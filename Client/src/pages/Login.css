@@ -20,14 +20,25 @@
 .login__form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .login__form>input {
   background: #F0F0F0;
   border-radius: 5px;
-  width: 442px;
-  height: 68px;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  /* identical to box height */
+  padding-left: 20px;
+  color: rgba(0, 0, 0, 0.4);
+  width: 40vw;
+  height: 5vh;
 }
+
+
 
 .login__form>input::placeholder {
   font-family: 'Lato';
@@ -41,15 +52,15 @@
 }
 
 .login__form>button {
-  width: 442px;
-  height: 68px;
+  width: 35vw;
+  height: 5vh;
   background: #44B7F8;
   border-radius: 5px;
   font-family: 'Lato';
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
   /* identical to box height */
 
   text-align: center;
@@ -68,4 +79,11 @@
   text-align: center;
 
   color: #44B7F8;
+}
+
+
+.error {
+  color: red;
+  font-family: Lato;
+  width: 40vh;
 }

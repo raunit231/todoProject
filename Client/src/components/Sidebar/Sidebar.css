@@ -1,9 +1,9 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   text-align: center;
   width: 100%;
+  height: 100%;
 }
 
 .sidebar__items {
@@ -22,8 +22,7 @@
   font-family: 'Lato';
   font-style: normal;
   font-weight: 800;
-  font-size: 17px;
-  line-height: 18px;
+  font-size: clamp(0.6rem,0.9rem,1.2rem);
   text-align: center;
   padding: 5px;
   color: #423D3D;
@@ -34,15 +33,14 @@
   background-color: rgba(128, 128, 128, 0.039);
 }
 .sidebar__items_container {
-  /* animation: disappear 1s ease-in-out;
-  animation-fill-mode: forwards; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   max-height: 0vh;
-  transition: all 0.8s cubic-bezier(0.96, 0.13, 0, 1.14);
+  transition: all 0.3s ease-out;
   overflow-y: scroll;
+
 }
 
 .sidebar__items_container::-webkit-scrollbar {
@@ -52,7 +50,8 @@
 
 .sidebar__items_container.show {
   max-height: 60vh;
-  transition: all 0.8s cubic-bezier(0.96, 0.13, 0, 1.14);
+  transition: all 0.3s ease-in;
+
 }
 
 .sidebar__items_tasklist {
@@ -160,4 +159,8 @@
     -webkit-transform-origin: 100% 0%;
             transform-origin: 100% 0%;
   }
+}
+
+.addItem {
+  margin-top: auto;
 }

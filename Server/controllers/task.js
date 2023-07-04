@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Task from "../models/Task.js";
 
 export const createTask = async (req, res) => {
@@ -23,9 +24,9 @@ export const createTask = async (req, res) => {
       timeSpent:0,
     });
     await newTask.save();
-    const tasklist = await Task.find({userId: userId});
+    // const tasklist = await Task.find({userId: userId});
 
-    res.status(201).json(tasklist);
+    res.status(201).json(newTask);
 
   } catch (error) {
     res.status(409).json({ error: error.message });
@@ -46,7 +47,7 @@ export const updateTask = async (req, res) => {
       priority,
     } = req.body;
     const { id } = req.params;
-
+    console.log(id);
     const updatedTask = await Task.findByIdAndUpdate(id,{
       heading:heading,
       description:description,
@@ -68,7 +69,7 @@ export const updateTaskDone = async (req, res) => {
   try {
     const {completed} = req.body;
     const { id } = req.params;
-    const updatedTask = await Task.findByIdAndUpdate(id ,{
+    const updatedTask = await Task.findByIdAndUpdate(id.trim() ,{
       completed:completed,
     },{new: true});
 
@@ -98,7 +99,7 @@ export const deleteTask = async (req, res) => {
   try {
     const { id } = req.params;
     await Task.findByIdAndDelete(id);
-    res.status(204);
+    res.sendStatus(204);
   } catch (error) {
     res.status(404).json({ error: error.message });
     
@@ -108,9 +109,11 @@ export const deleteTask = async (req, res) => {
 export const getUserTasks = async (req, res) => {
   try {
     const { userId } = req.params;
-    const tasklist = await Task.find({userId: userId});
+    // const id = new mongoose.Types.ObjectId(userId);
+    console.log(req.header("Authorization"));
+    const tasklist = await Task.find({userId: userId.trim()});
     res.status(200).json(tasklist);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 }
