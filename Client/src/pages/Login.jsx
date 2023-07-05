@@ -24,7 +24,7 @@ function Login() {
 	const handleSubmit = async (values) => {
 		try {
 			const { data } = await axios.post(
-				"http://localhost:3001/auth/login",
+				"https://todo-project-xsev.onrender.com/auth/login",
 				values,
 				{
 					headers: {
@@ -41,7 +41,7 @@ function Login() {
 			);
 			const { _id } = user;
 			const taskResponse = await axios.get(
-				`http://localhost:3001/task/${_id}/tasks`,
+				`https://todo-project-xsev.onrender.com/task/${_id}/tasks`,
 				{
 					headers: {
 						Authorization: `Bearer ${token}`,

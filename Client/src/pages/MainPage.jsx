@@ -17,7 +17,7 @@ function MainPage() {
       try {
         const { _id } = user;
 				const taskResponse = await axios.get(
-					`http://localhost:3001/task/${_id}/tasks`,
+					`https://todo-project-xsev.onrender.com/task/${_id}/tasks`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,

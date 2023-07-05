@@ -27,7 +27,7 @@ function SignUp() {
 		try {
 			console.log(values);
 			const { data } = await axios.post(
-				"http://localhost:3001/auth/register",
+				"https://todo-project-xsev.onrender.com/auth/register",
 				values,
 				{
 					headers: {
@@ -41,11 +41,14 @@ function SignUp() {
         user:user
       }));
       const { _id } =user;
-      const { tasklist }= await axios.get(`http://localhost:3001/task/${_id}/tasks`,{
-        headers:{
-          "Authorization":`Bearer ${token}`
-        }
-      }).data;
+      const { tasklist } = await axios.get(
+				`https://todo-project-xsev.onrender.com/task/${_id}/tasks`,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			).data;
       dispatch(setTasks({
         tasks:tasklist
       }));

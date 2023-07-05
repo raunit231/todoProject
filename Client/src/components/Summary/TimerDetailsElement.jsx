@@ -42,7 +42,7 @@ function TimerDetailsElement() {
 				}, 10);
 
 				await axios.patch(
-					`http://localhost:3001/task/${_id}/completed`,
+					`https://todo-project-xsev.onrender.com/task/${_id}/completed`,
 					{
 						completed: e.target.checked,
 					},
@@ -62,11 +62,14 @@ function TimerDetailsElement() {
 				dispatch(deleteTask({
 					_id: _id
 				}));
-				await axios.delete(`http://localhost:3001/task/${_id}`, {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
+				await axios.delete(
+					`https://todo-project-xsev.onrender.com/task/${_id}`,
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				);
 			} catch (error) {
 				console.error(error);
 			}
@@ -119,7 +122,7 @@ function TimerDetailsElement() {
 				if (task) {
 					try {
 						const { data } = await axios.patch(
-							`http://localhost:3001/task/${task._id}/timer`,
+							`https://todo-project-xsev.onrender.com/task/${task._id}/timer`,
 							{
 								timeSpent: task.timeSpent,
 							},
@@ -129,7 +132,7 @@ function TimerDetailsElement() {
 									"Content-Type": "application/json",
 								},
 							}
-							);
+						);
 						
 							dispatch(
 								setTask({

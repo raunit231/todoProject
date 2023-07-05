@@ -86,7 +86,7 @@ function TaskElement({
 			}, 10);
 
 			await axios.patch(
-				`http://localhost:3001/task/${_id}/completed`,
+				`https://todo-project-xsev.onrender.com/task/${_id}/completed`,
 				{
 					completed: e.target.checked,
 				},
@@ -171,7 +171,7 @@ function TaskElement({
 				selectedValue === "a" ? 1 : selectedValue === "b" ? 2 : 3;
 			setExpand(false);
 			const { data } = await axios.patch(
-				`http://localhost:3001/task/${_id}`,
+				`https://todo-project-xsev.onrender.com/task/${_id}`,
 				{
 					heading: taskTitleValue,
 					description: taskDescValue,
@@ -204,7 +204,7 @@ function TaskElement({
 					_id: _id,
 				})
 			);
-			await axios.delete(`http://localhost:3001/task/${_id}`, {
+			await axios.delete(`https://todo-project-xsev.onrender.com/task/${_id}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},

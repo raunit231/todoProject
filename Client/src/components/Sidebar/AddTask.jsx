@@ -90,7 +90,7 @@ function AddTask({ setExpandedIndex }) {
 			setExpandedIndex(0);
 			const { _id } = user;
 			const { data } = await axios.post(
-				`http://localhost:3001/task/`,
+				`https://todo-project-xsev.onrender.com/task/`,
 				{
 					userId: _id,
 					heading: taskTitleValue,
