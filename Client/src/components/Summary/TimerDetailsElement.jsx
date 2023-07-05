@@ -18,7 +18,9 @@ import {
 	updateTimer,
 } from "../../State/authSlice";
 import axios from "axios";
+import Spinner from "../Spinner";
 function TimerDetailsElement() {
+	const [isLoading, setIsLoading] = useState(false);
 	let tasklist = useSelector((state) => state.tasks);
 	tasklist = tasklist.filter((task) => task.completed);
 	const token = useSelector((state) => state.token);
@@ -32,6 +34,7 @@ function TimerDetailsElement() {
 
 			try {
 				setChecked(e.target.checked);
+				setIsLoading(true);
 				setTimeout(() => {
 					dispatch(
 						setCompleted({
@@ -39,6 +42,7 @@ function TimerDetailsElement() {
 							completed: e.target.checked,
 						})
 					);
+					setIsLoading(false);
 				}, 10);
 
 				await axios.patch(
@@ -59,6 +63,7 @@ function TimerDetailsElement() {
 		};
 		const handleDelete = async () => {
 			try {
+				setIsLoading(true);
 				dispatch(deleteTask({
 					_id: _id
 				}));
@@ -72,6 +77,8 @@ function TimerDetailsElement() {
 				);
 			} catch (error) {
 				console.error(error);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 		return (
@@ -185,6 +192,7 @@ function TimerDetailsElement() {
 		<div
 			className={`my-7 mx-4 flex-1 items-center space-y-2 flex flex-col overflow-hidden`}
 		>
+			{isLoading && <Spinner/>}
 			<div
 				className={`allcompleted_task py-1 rounded-xl bg-white ${
 					toggle ? "flex-1" : ""

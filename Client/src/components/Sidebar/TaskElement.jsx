@@ -22,6 +22,7 @@ import {
 } from "../../State/authSlice";
 import axios from "axios";
 import { rygColor } from "../../assets/color";
+import Spinner from "../Spinner";
 
 function TaskElement({
 	userId,
@@ -36,6 +37,7 @@ function TaskElement({
 	timeSpent,
 	task,
 }) {
+	const [isLoading, setIsLoading] = useState(false);
 	const [expand, setExpand] = useState(false);
 	const [checked, setChecked] = useState(completed);
 	const [taskTitleValue, setTaskTitleValue] = useState(taskTitle);
@@ -75,6 +77,7 @@ function TaskElement({
 	const token = useSelector((state) => state.token);
 	const handleCheck = async (e) => {
 		try {
+			setIsLoading(true);
 			setChecked(e.target.checked);
 			setTimeout(() => {
 				dispatch(
@@ -99,6 +102,8 @@ function TaskElement({
 			);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 	const handleTaskChange = (e) => {
@@ -167,6 +172,7 @@ function TaskElement({
 	};
 	const handleDone = async () => {
 		try {
+			setIsLoading(true);
 			let prioritySelected =
 				selectedValue === "a" ? 1 : selectedValue === "b" ? 2 : 3;
 			setExpand(false);
@@ -195,10 +201,13 @@ function TaskElement({
 			);
 		} catch (error) {
 			console.error(error);
+		} finally{
+			setIsLoading(false);
 		}
 	};
 	const handleDelete = async () => {
 		try {
+			setIsLoading(true);
 			dispatch(
 				deleteTask({
 					_id: _id,
@@ -211,16 +220,19 @@ function TaskElement({
 			});
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 	return (
 		<div
 			className={`task p-[0.35rem]  flex flex-col my-2 ${expand ? "task_editable" : ""}`}
 		>
+			{isLoading && <Spinner/>}
 			<div className="task__heading space-x-1 hover:bg-gray-50">
 				{!expand && (
 					<Checkbox
-						className="w-[10%]"
+						className="w-auto h-[10%]"
 						icon={<RadioButtonUncheckedIcon />}
 						checkedIcon={<CheckCircleOutlineIcon className="text-black" />}
 						onChange={handleCheck}

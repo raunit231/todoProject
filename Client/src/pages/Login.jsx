@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { setLogin, setTasks } from "../State/authSlice";
 import axios from "axios";
+import Spinner from "../components/Spinner";
+
 
 function Login() {
   const initialValues = {
@@ -14,7 +16,7 @@ function Login() {
   }
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const [isLoading, setIsLoading] = useState(false);
 	const validationSchema = Yup.object({
 		email: Yup.string()
 			.email("Invalid email address")
@@ -23,6 +25,7 @@ function Login() {
 	});
 	const handleSubmit = async (values) => {
 		try {
+			setIsLoading(true);
 			const { data } = await axios.post(
 				"https://todo-project-xsev.onrender.com/auth/login",
 				values,
@@ -59,10 +62,13 @@ function Login() {
 			}
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 	return (
 		<div className="login__container">
+			{isLoading && <Spinner/>}
 			<div className="login__container_2">
 				<img
 					className="my-2 object-contain"

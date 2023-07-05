@@ -5,12 +5,13 @@ import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../State/authSlice";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../Spinner";
 function Profile() {
-
-  const user = useSelector(state => state.user);
-  const {firstName, lastName, email} = user;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
+	const user = useSelector((state) => state.user);
+	const { firstName, lastName, email } = user;
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const Menu = () => {
 		const [isMenuOpen, setIsMenuOpen] = useState(false);
 		const handleScreenClick = () => {
@@ -32,23 +33,26 @@ function Profile() {
 		};
 
 		const handleMenuItemClick = () => {
-			dispatch(setLogout());
-      navigate("/");
+			setIsLoading(true);
+			setTimeout(() => {
+				dispatch(setLogout());
+				navigate("/");
+				setIsLoading(false);
+			}, 300);
 		};
 
 		return (
 			<div style={{ position: "relative" }}>
 				<IconButton className="menu-icon" onClick={handleToggleMenu}>
-					<MoreVertIcon/>
+					<MoreVertIcon />
 				</IconButton>
 
 				{isMenuOpen && (
-					<div className="menu m-8 px-2" style={{ position: "absolute", top: "-100%" }}>
-						<div
-							className="menu_item"
-						>
-							{email}
-						</div>
+					<div
+						className="menu m-8 px-2"
+						style={{ position: "absolute", top: "-100%" }}
+					>
+						<div className="menu_item">{email}</div>
 						<div
 							className="menu_item cursor-pointer hover:bg-gray-200"
 							onClick={handleMenuItemClick}
@@ -61,9 +65,10 @@ function Profile() {
 		);
 	};
 	return (
-		<div  className="flex profile mx-1">
+		<div className="flex profile mx-1">
+			{isLoading && <Spinner />}
 			<div className="flex justify-center items-center">
-				<h1 >{`${firstName[0]+lastName[0]}`}</h1>
+				<h1>{`${firstName[0] + lastName[0]}`}</h1>
 			</div>
 			<div className="profile__name">{`${firstName} ${lastName}`}</div>
 			<Menu />
