@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -6,9 +6,11 @@ import { useDispatch} from "react-redux";
 import axios from "axios";
 import { setLogin, setTasks } from "../State/authSlice";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 function SignUp() {
 	const dispatch = useDispatch();
   const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
 	const initialValues = {
 		firstName: "",
 		lastName: "",
@@ -25,7 +27,7 @@ function SignUp() {
 	});
 	const handleSubmit = async (values) => {
 		try {
-			console.log(values);
+			setIsLoading(true);
 			const { data } = await axios.post(
 				"https://todo-project-xsev.onrender.com/auth/register",
 				values,
@@ -41,14 +43,14 @@ function SignUp() {
         user:user
       }));
       const { _id } =user;
-      const { tasklist } = await axios.get(
+      const { data:tasklist } = await axios.get(
 				`https://todo-project-xsev.onrender.com/task/${_id}/tasks`,
 				{
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
 				}
-			).data;
+			);
       dispatch(setTasks({
         tasks:tasklist
       }));
@@ -58,11 +60,14 @@ function SignUp() {
 
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
 	return (
 		<div className="login__container">
+			{isLoading && <Spinner />}
 			<div className="login__container_2">
 				<img
 					className="my-2 object-contain"
