@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import MainPage from './pages/MainPage';
 import SignUp from './pages/SignUp';
 import { useSelector } from 'react-redux';
+import HackTimer from 'hacktimer/HackTimer';
 
 function App() {
   const isLoggedIn = Boolean(useSelector((state) => state.token));
