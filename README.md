@@ -13,7 +13,6 @@
 - **Time Tracking**: Track time spent on each task individually.
 - **Bar Graph Visualization**: Dynamic graphs to visualize tasks and time spent.
 - **JWT Authentication**: Secure login and session management.
-- **Responsive Design**: Optimized for both desktop and mobile devices.
 - **RESTful API**: CRUD operations for tasks, user authentication, and task prioritization.
 
 ## Tech Stack
