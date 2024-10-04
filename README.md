@@ -3,7 +3,8 @@
 # Task Tracker
 
 ## Overview
-![App Screenshot](https://github.com/user-attachments/assets/b9f55b74-0387-43f1-af9a-0d509d34119e)
+<img width="2750" alt="Screenshot 2024-10-04 at 4 21 15 PM" src="https://github.com/user-attachments/assets/8735edea-4404-4366-9c14-585827eb19c9">
+
 
 **Task Tracker** is a full-stack web application designed to help users efficiently manage their daily tasks. The app allows users to create tasks, set priorities, track time spent on each task, and visualize their progress through dynamic bar graphs. The frontend is built with **React**, while the backend uses **Express** with **MongoDB** as the database. JWT-based authentication ensures secure user sessions.
 
